@@ -1,11 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
   
   // ==========================================
-  // 1. MOTOR DE TEXT-TO-SPEECH (LECTURA DE NOTAS)
+  // 1. MOTOR DE TEXT-TO-SPEECH PARA MÓVILES
   // ==========================================
   const cards = document.querySelectorAll('.news-card');
   let currentUtterance = null;
   let activeSpeechBtn = null;
+  let systemVoices = [];
+
+  // Forzar la carga de voces en navegadores móviles (iOS / Android)
+  function loadVoices() {
+    if (typeof speechSynthesis !== 'undefined') {
+      systemVoices = window.speechSynthesis.getVoices();
+    }
+  }
+
+  loadVoices();
+  if (typeof speechSynthesis !== 'undefined' && speechSynthesis.onvoiceschanged !== undefined) {
+    speechSynthesis.onvoiceschanged = loadVoices;
+  }
 
   cards.forEach(card => {
     const title = card.querySelector('.article-title').innerText;
@@ -14,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const ttsBtn = card.querySelector('.tts-btn');
     const ttsLabel = ttsBtn.querySelector('.tts-text');
 
-    // Cálculo automático del tiempo estimado de lectura (Promedio: 200 Palabras por minuto)
+    // Tiempo estimado de lectura
     const totalWords = (title + " " + text).split(/\s+/).length;
     const wordsPerMinute = parseInt(timeBadge.getAttribute('data-wpm')) || 200;
     const rawMinutes = totalWords / wordsPerMinute;
@@ -22,58 +35,48 @@ document.addEventListener('DOMContentLoaded', () => {
     if (rawMinutes < 0.75) {
       timeBadge.innerText = `Sec. de lectura`;
     } else {
-      const roundedMinutes = Math.round(rawMinutes);
-      timeBadge.innerText = `${roundedMinutes} min. de lectura`;
+      timeBadge.innerText = `${Math.round(rawMinutes)} min. de lectura`;
     }
 
-    // Configuración del click para escuchar la nota
+    // Evento de lectura optimizado para táctil
     ttsBtn.addEventListener('click', (e) => {
       e.stopPropagation();
 
-      // Si se hace click en el botón que ya está sonando, se pausa/detiene por completo
       if (window.speechSynthesis.speaking && activeSpeechBtn === ttsBtn) {
         window.speechSynthesis.cancel();
         resetTtsState();
         return;
       }
 
-      // Detener cualquier otra lectura activa previa
       window.speechSynthesis.cancel();
       if (activeSpeechBtn) resetTtsState();
 
-      // Si la radio en vivo está sonando, pausarla para no sobreponer audios
+      // Pausar la radio en vivo si está activa
       if (!audio.paused) {
         playBtn.click();
       }
 
-      // Configurar el texto unificado a reproducir
-      const textToRead = `Leyendo artículo informativo: ${title}. Detalle: ${text}`;
+      const textToRead = `${title}. ${text}`;
       currentUtterance = new SpeechSynthesisUtterance(textToRead);
 
-      // Algoritmo de filtrado de voces: Busca una voz femenina en español Latinoamericano
-      const voices = window.speechSynthesis.getVoices();
-      let selectedVoice = voices.find(v => v.lang.includes('es-MX') || v.lang.includes('es-US') || v.lang.includes('es-419'));
-      
-      // Respaldo secundario por si no encuentra la localización exacta
+      // Recargar voces por si el móvil no las había inicializado
+      if (systemVoices.length === 0) loadVoices();
+
+      // Búsqueda flexible de voz en español latino/general
+      let selectedVoice = systemVoices.find(v => v.lang.includes('es-MX') || v.lang.includes('es-US') || v.lang.includes('es-419'));
       if (!selectedVoice) {
-        selectedVoice = voices.find(v => v.lang.startsWith('es'));
+        selectedVoice = systemVoices.find(v => v.lang.startsWith('es'));
       }
 
       if (selectedVoice) currentUtterance.voice = selectedVoice;
-      currentUtterance.rate = 0.95; // Velocidad de lectura óptima natural
+      currentUtterance.rate = 0.95;
 
-      // Cambiar estado visual del botón activo
       activeSpeechBtn = ttsBtn;
       ttsBtn.classList.add('playing-tts');
       ttsLabel.innerText = "Detener audio";
 
-      currentUtterance.onend = () => {
-        resetTtsState();
-      };
-
-      currentUtterance.onerror = () => {
-        resetTtsState();
-      };
+      currentUtterance.onend = () => resetTtsState();
+      currentUtterance.onerror = () => resetTtsState();
 
       window.speechSynthesis.speak(currentUtterance);
     });
@@ -88,14 +91,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Carga asíncrona preventiva de las voces del sistema operativo
-  if (typeof speechSynthesis !== 'undefined' && speechSynthesis.onvoiceschanged !== undefined) {
-    speechSynthesis.onvoiceschanged = window.speechSynthesis.getVoices;
-  }
-
 
   // ==========================================
-  // 2. CONTROL DEL REPRODUCTOR DE RADIO EN VIVO
+  // 2. REPRODUCTOR DE RADIO OPTIMIZADO
   // ==========================================
   const audio = document.getElementById('audio');
   const playBtn = document.getElementById('playBtn');
@@ -112,27 +110,32 @@ document.addEventListener('DOMContentLoaded', () => {
   audio.volume = parseFloat(volumeSlider.value);
 
   playBtn.addEventListener('click', () => {
-    // Si la lectura de un artículo está activa, detenerla antes de abrir la radio
-    if (window.speechSynthesis.speaking) {
+    // Detener síntesis de voz al reproducir la radio
+    if (window.speechSynthesis && window.speechSynthesis.speaking) {
       window.speechSynthesis.cancel();
       resetTtsState();
     }
 
     if (audio.paused) {
       if (loader) loader.classList.remove('hidden');
+      
+      // Asignar el origen e iniciar reproducción inmediatamente en la misma acción del toque
       audio.src = streamUrl;
       
-      audio.play().then(() => {
-        playIcon.classList.add('hidden');
-        pauseIcon.classList.remove('hidden');
-        equalizer.classList.add('active');
-      }).catch(err => {
-        console.error("Error al conectar el streaming:", err);
-        if (loader) loader.classList.add('hidden');
-      });
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          playIcon.classList.add('hidden');
+          pauseIcon.classList.remove('hidden');
+          equalizer.classList.add('active');
+        }).catch(err => {
+          console.error("Error al iniciar audio en móvil:", err);
+          if (loader) loader.classList.add('hidden');
+        });
+      }
     } else {
       audio.pause();
-      audio.removeAttribute('src'); // Destruir el buffer de descarga continua
+      audio.removeAttribute('src'); // Liberar memoria de datos móviles
       
       playIcon.classList.remove('hidden');
       pauseIcon.classList.add('hidden');
@@ -141,7 +144,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Eventos de estado de red para remover el spinner de carga
   ['playing', 'canplay', 'loadedmetadata', 'error'].forEach(evt => {
     audio.addEventListener(evt, () => {
       if (loader) loader.classList.add('hidden');
