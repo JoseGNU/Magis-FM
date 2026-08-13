@@ -1,14 +1,38 @@
 document.addEventListener('DOMContentLoaded', () => {
-  
+
   // ==========================================
-  // 1. MOTOR DE TEXT-TO-SPEECH PARA MÓVILES
+  // 1. CONTROL DEL MENÚ DESPLEGABLE (OFF-CANVAS)
+  // ==========================================
+  const menuToggleBtn = document.getElementById('menuToggleBtn');
+  const closeNavBtn = document.getElementById('closeNavBtn');
+  const sideNav = document.getElementById('sideNav');
+  const sideNavOverlay = document.getElementById('sideNavOverlay');
+
+  function openNav() {
+    sideNav.classList.add('active');
+    sideNavOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeNav() {
+    sideNav.classList.remove('active');
+    sideNavOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  if (menuToggleBtn) menuToggleBtn.addEventListener('click', openNav);
+  if (closeNavBtn) closeNavBtn.addEventListener('click', closeNav);
+  if (sideNavOverlay) sideNavOverlay.addEventListener('click', closeNav);
+
+
+  // ==========================================
+  // 2. MOTOR DE TEXT-TO-SPEECH (LECTOR DE NOTICIAS)
   // ==========================================
   const cards = document.querySelectorAll('.news-card');
   let currentUtterance = null;
   let activeSpeechBtn = null;
   let systemVoices = [];
 
-  // Forzar la carga de voces en navegadores móviles (iOS / Android)
   function loadVoices() {
     if (typeof speechSynthesis !== 'undefined') {
       systemVoices = window.speechSynthesis.getVoices();
@@ -27,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const ttsBtn = card.querySelector('.tts-btn');
     const ttsLabel = ttsBtn.querySelector('.tts-text');
 
-    // Tiempo estimado de lectura
+    // Estimación del tiempo de lectura
     const totalWords = (title + " " + text).split(/\s+/).length;
     const wordsPerMinute = parseInt(timeBadge.getAttribute('data-wpm')) || 200;
     const rawMinutes = totalWords / wordsPerMinute;
@@ -38,7 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
       timeBadge.innerText = `${Math.round(rawMinutes)} min. de lectura`;
     }
 
-    // Evento de lectura optimizado para táctil
     ttsBtn.addEventListener('click', (e) => {
       e.stopPropagation();
 
@@ -51,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
       window.speechSynthesis.cancel();
       if (activeSpeechBtn) resetTtsState();
 
-      // Pausar la radio en vivo si está activa
+      // Pausar la radio si está reproduciendo
       if (!audio.paused) {
         playBtn.click();
       }
@@ -59,10 +82,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const textToRead = `${title}. ${text}`;
       currentUtterance = new SpeechSynthesisUtterance(textToRead);
 
-      // Recargar voces por si el móvil no las había inicializado
       if (systemVoices.length === 0) loadVoices();
 
-      // Búsqueda flexible de voz en español latino/general
       let selectedVoice = systemVoices.find(v => v.lang.includes('es-MX') || v.lang.includes('es-US') || v.lang.includes('es-419'));
       if (!selectedVoice) {
         selectedVoice = systemVoices.find(v => v.lang.startsWith('es'));
@@ -93,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ==========================================
-  // 2. REPRODUCTOR DE RADIO OPTIMIZADO
+  // 3. REPRODUCTOR DE RADIO EN VIVO
   // ==========================================
   const audio = document.getElementById('audio');
   const playBtn = document.getElementById('playBtn');
@@ -110,7 +131,6 @@ document.addEventListener('DOMContentLoaded', () => {
   audio.volume = parseFloat(volumeSlider.value);
 
   playBtn.addEventListener('click', () => {
-    // Detener síntesis de voz al reproducir la radio
     if (window.speechSynthesis && window.speechSynthesis.speaking) {
       window.speechSynthesis.cancel();
       resetTtsState();
@@ -119,7 +139,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (audio.paused) {
       if (loader) loader.classList.remove('hidden');
       
-      // Asignar el origen e iniciar reproducción inmediatamente en la misma acción del toque
       audio.src = streamUrl;
       
       const playPromise = audio.play();
@@ -129,13 +148,13 @@ document.addEventListener('DOMContentLoaded', () => {
           pauseIcon.classList.remove('hidden');
           equalizer.classList.add('active');
         }).catch(err => {
-          console.error("Error al iniciar audio en móvil:", err);
+          console.error("Error al iniciar audio:", err);
           if (loader) loader.classList.add('hidden');
         });
       }
     } else {
       audio.pause();
-      audio.removeAttribute('src'); // Liberar memoria de datos móviles
+      audio.removeAttribute('src');
       
       playIcon.classList.remove('hidden');
       pauseIcon.classList.add('hidden');
