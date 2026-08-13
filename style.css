@@ -35,7 +35,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 4px 15px rgba(11, 34, 64, 0.2);
+  box-shadow: 0 4px 15px rgba #1165a2bf (17, 101, 162, 0.75);
   border-bottom: 3px solid #f2b705; 
 }
 
