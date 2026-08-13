@@ -3,164 +3,165 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Magis FM | La Voz del Instituto Politécnico Loyola</title>
+  <title>Magis FM - Periódico Digital e Emisora en Vivo</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Menú de Navegación Moderno -->
-  <nav class="navbar">
-    <div class="nav-container">
-      <a href="#" class="nav-brand">
-        <img src="https://pbs.twimg.com/profile_images/1719736524957188096/3nv0ehyi_400x400.jpg" alt="Magis FM Logo" class="nav-logo">
-        <span class="nav-title">Magis <span class="accent-text">FM</span></span>
-      </a>
-      <ul class="nav-menu">
-        <li><a href="#" class="nav-link active">Inicio</a></li>
-        <li><a href="#" class="nav-link">Programación</a></li>
-        <li><a href="#" class="nav-link">Noticias</a></li>
-        <li><a href="#" class="nav-link">Podcasts</a></li>
-        <li><a href="#" class="nav-link">Contacto</a></li>
-      </ul>
-    </div>
-  </nav>
+  <!-- CABECERA DE LA PÁGINA -->
+  <header class="site-header">
+    <div class="header-container">
+      <button id="menuToggleBtn" class="menu-toggle-btn" aria-label="Abrir menú">
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
 
-  <!-- Héroe / Portada Principal -->
-  <header class="hero-section">
-    <div class="hero-content">
-      <span class="hero-tag">Emisora Institucional</span>
-      <h1>Comunicación que Transforma e Inspira</h1>
-      <p>Sintoniza la frecuencia de la educación, los valores y la mejor música desde el Instituto Politécnico Loyola.</p>
+      <div class="logo-container">
+        <a href="#">
+          <img src="logo-magisfm.png" alt="Magis FM" class="site-logo">
+        </a>
+      </div>
+      
+      <div class="header-spacer"></div>
     </div>
   </header>
 
-  <!-- Sección de Noticias Modernas -->
-  <main class="main-content">
-    <section class="news-section">
-      <h2 class="section-title">Actualidad & Noticias</h2>
-      <div class="news-grid">
-        
-        <!-- Tarjeta de Noticia 1 -->
-        <article class="news-card">
-          <div class="news-img-wrapper">
-            <div class="news-badge">Institucional</div>
-            <div class="fallback-image">IPL</div>
-          </div>
-          <div class="news-body">
-            <div class="news-meta">
-              <span class="news-date">12 de Agosto, 2026</span>
-              <span class="reading-time" data-wpm="200">Calculando tiempo...</span>
-            </div>
-            <h3 class="article-title">Loyola da la bienvenida al nuevo ciclo académico con innovaciones tecnológicas</h3>
-            <p class="article-text">Conoce los nuevos proyectos y mejoras de infraestructura digital que se implementan este año para toda la comunidad técnica. El Instituto Politécnico Loyola reafirma su compromiso con la excelencia educativa integrando plataformas avanzadas para el desarrollo integral.</p>
-            <div class="article-footer-controls">
-              <button class="tts-btn" aria-label="Escuchar artículo">
-                <svg viewBox="0 0 24 24" class="tts-icon"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
-                <span class="tts-text">Escuchar nota</span>
-              </button>
-            </div>
-          </div>
-        </article>
-
-        <!-- Tarjeta de Noticia 2 -->
-        <article class="news-card">
-          <div class="news-img-wrapper">
-            <div class="news-badge">Cultura</div>
-            <div class="fallback-image alternative">Magis</div>
-          </div>
-          <div class="news-body">
-            <div class="news-meta">
-              <span class="news-date">10 de Agosto, 2026</span>
-              <span class="reading-time" data-wpm="200">Calculando tiempo...</span>
-            </div>
-            <h3 class="article-title">Magis FM estrena nueva franja horaria dedicada a la investigación y el debate</h3>
-            <p class="article-text">Un espacio abierto para que estudiantes y docentes compartan sus hallazgos, proyectos de grado y análisis del entorno social. La producción radial contará con la participación activa de expertos invitados de diversas áreas técnicas y humanísticas.</p>
-            <div class="article-footer-controls">
-              <button class="tts-btn" aria-label="Escuchar artículo">
-                <svg viewBox="0 0 24 24" class="tts-icon"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
-                <span class="tts-text">Escuchar nota</span>
-              </button>
-            </div>
-          </div>
-        </article>
-
-        <!-- Tarjeta de Noticia 3 -->
-        <article class="news-card">
-          <div class="news-img-wrapper">
-            <div class="news-badge">Comunidad</div>
-            <div class="fallback-image">Radio</div>
-          </div>
-          <div class="news-body">
-            <div class="news-meta">
-              <span class="news-date">05 de Agosto, 2026</span>
-              <span class="reading-time" data-wpm="200">Calculando tiempo...</span>
-            </div>
-            <h3 class="article-title">Estudiantes de Ingeniería del IPL destacan en competencia de robótica</h3>
-            <p class="article-text">Nuestra delegación técnica obtiene reconocimientos clave gracias al desarrollo de prototipos automatizados de alta eficiencia. Los proyectos presentados resuelven problemas de manufactura automatizada y logística industrial de forma sostenible.</p>
-            <div class="article-footer-controls">
-              <button class="tts-btn" aria-label="Escuchar artículo">
-                <svg viewBox="0 0 24 24" class="tts-icon"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
-                <span class="tts-text">Escuchar nota</span>
-              </button>
-            </div>
-          </div>
-        </article>
-
+  <!-- PANEL NAVEGACIÓN DESPLEGABLE (OFF-CANVAS) -->
+  <div id="sideNavOverlay" class="sidenav-overlay"></div>
+  <aside id="sideNav" class="sidenav">
+    <div class="sidenav-header">
+      <button id="closeNavBtn" class="close-nav-btn">&times;</button>
+    </div>
+    
+    <div class="sidenav-search">
+      <label for="searchInput" class="search-label">BUSCAR</label>
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Buscar..." />
+        <span class="search-icon">🔍</span>
       </div>
-    </section>
+    </div>
+
+    <nav class="sidenav-menu">
+      <ul>
+        <li><a href="#" class="active"><span class="nav-arrow">›</span> 🏠 INICIO</a></li>
+        <li><a href="#"><span class="nav-arrow">›</span> SAN CRISTÓBAL</a></li>
+        <li><a href="#"><span class="nav-arrow">›</span> NACIONALES</a></li>
+        <li><a href="#"><span class="nav-arrow">›</span> EL MUNDO</a></li>
+        <li><a href="#"><span class="nav-arrow">›</span> DEPORTES</a></li>
+        <li><a href="#"><span class="nav-arrow">›</span> ENTRETENIMIENTO</a></li>
+        <li><a href="#"><span class="nav-arrow">›</span> LA VIDA</a></li>
+        <li><a href="#"><span class="nav-arrow">›</span> VIDEOS</a></li>
+        <li><a href="#"><span class="nav-arrow">›</span> MAGIS FM</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- CONTENIDO PRINCIPAL / NOTICIAS -->
+  <main class="main-content">
+    <div class="container">
+      <section class="news-grid">
+
+        <!-- NOTICIA 1 -->
+        <article class="news-card">
+          <div class="card-image">
+            <img src="noticia1.jpg" alt="Imagen Noticia 1">
+          </div>
+          <div class="card-content">
+            <span class="reading-time" data-wpm="200">Calculando...</span>
+            <h2 class="article-title">Nuevos avances académicos e institucionales en el IPL</h2>
+            <p class="article-text">
+              El Instituto Politécnico Loyola continúa fortaleciendo su compromiso con la educación técnica y profesional de alta calidad, presentando innovadores programas formativos y actualización tecnológica para la comunidad estudiantil.
+            </p>
+            <button class="tts-btn">
+              <span class="tts-icon">🔊</span>
+              <span class="tts-text">Escuchar nota</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- NOTICIA 2 -->
+        <article class="news-card">
+          <div class="card-image">
+            <img src="noticia2.jpg" alt="Imagen Noticia 2">
+          </div>
+          <div class="card-content">
+            <span class="reading-time" data-wpm="200">Calculando...</span>
+            <h2 class="article-title">Magis FM expande su cobertura digital e interactiva</h2>
+            <p class="article-text">
+              La emisora institucional estrena su plataforma moderna con transmisión en vivo sin interrupciones, diseño adaptativo para teléfonos inteligentes y tecnología de accesibilidad por voz sintetizada para sus lectores.
+            </p>
+            <button class="tts-btn">
+              <span class="tts-icon">🔊</span>
+              <span class="tts-text">Escuchar nota</span>
+            </button>
+          </div>
+        </article>
+
+      </section>
+    </div>
   </main>
 
-  <!-- Pie de Página Institucional -->
-  <footer class="main-footer">
-    <p>&copy; 2026 Instituto Politécnico Loyola | Magis FM. Todos los derechos reservados.</p>
-    <p style="font-size: 12px; margin-top: 5px; opacity: 0.6;">San Cristóbal, República Dominicana</p>
+  <!-- PIE DE PÁGINA (FOOTER INSTITUCIONAL) -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <img src="logo-loyola.png" alt="Instituto Politécnico Loyola" class="footer-logo">
+        <div class="brand-text">
+          <span class="sub-title">Instituto Politécnico</span>
+          <strong class="main-title">LOYOLA</strong>
+        </div>
+      </div>
+
+      <div class="footer-column">
+        <h4>COMUNIDAD IPL</h4>
+        <ul>
+          <li><a href="#">Portal IPL</a></li>
+          <li><a href="#">Asuntos Estudiantiles</a></li>
+          <li><a href="#">Pastoral</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>NIVELES ACADÉMICOS</h4>
+        <ul>
+          <li><a href="#">Nivel Inicial y Primario</a></li>
+          <li><a href="#">Nivel Secundario</a></li>
+          <li><a href="#">Nivel Superior (IEESL)</a></li>
+          <li><a href="#">Educación Continuada</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Instituto Politécnico Loyola. Todos los derechos reservados.</p>
+    </div>
   </footer>
 
-  <!-- REPRODUCTOR PERSISTENTE FIJO AL PIE DE LA PANTALLA (Fixed Docked Player) -->
-  <div class="fixed-bottom-player">
-    <div class="radio-player-card">
-      
-      <!-- Overlay de Carga -->
-      <div id="loader" class="player-loader hidden">
-        <div class="spinner"></div>
-        <span>Conectando señal...</span>
+  <!-- REPRODUCTOR DE RADIO DOCKING FIJO -->
+  <div class="player-dock">
+    <audio id="audio" preload="none"></audio>
+    
+    <div class="player-info">
+      <div class="player-status">
+        <span class="live-badge">EN VIVO</span>
+        <span class="station-name">Magis 98.3 FM</span>
       </div>
-
-      <div class="player-header">
-        <div class="live-indicator">
-          <span class="pulse-dot"></span>
-          <span class="live-text">EN VIVO</span>
-        </div>
-        <div class="station-brand">
-          <img src="https://pbs.twimg.com/profile_images/1719736524957188096/3nv0ehyi_400x400.jpg" alt="Magis FM" class="station-logo">
-          <div class="equalizer-icon" id="equalizer">
-            <span></span><span></span><span></span><span></span>
-          </div>
-          <span class="station-name">MAGIS FM</span>
-        </div>
+      <div id="equalizer" class="equalizer">
+        <span></span><span></span><span></span>
       </div>
+    </div>
 
-      <div class="player-controls">
-        <button id="playBtn" class="play-btn" aria-label="Reproducir/Pausar">
-          <svg id="playIcon" viewBox="0 0 24 24" class="control-icon">
-            <path d="M8 5v14l11-7z"/>
-          </svg>
-          <svg id="pauseIcon" viewBox="0 0 24 24" class="control-icon hidden">
-            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-          </svg>
-        </button>
+    <div class="player-controls">
+      <button id="playBtn" class="play-btn" aria-label="Reproducir">
+        <svg id="playIcon" viewBox="0 0 24 24" class="icon"><path d="M8 5v14l11-7z"/></svg>
+        <svg id="pauseIcon" viewBox="0 0 24 24" class="icon hidden"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        <div id="loader" class="loader hidden"></div>
+      </button>
+    </div>
 
-        <div class="volume-container">
-          <button id="muteBtn" class="volume-btn" aria-label="Silenciar">
-            <svg id="volumeIcon" viewBox="0 0 24 24" class="control-icon">
-              <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
-            </svg>
-          </button>
-          <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1" class="volume-slider">
-        </div>
-      </div>
-
-      <audio id="audio"></audio>
+    <div class="player-volume">
+      <button id="muteBtn" class="mute-btn" aria-label="Silenciar">🔊</button>
+      <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.9">
     </div>
   </div>
 
