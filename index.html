@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Magis FM - Periódico Digital e Emisora en Vivo</title>
+  <title>Magis FM - Periódico Digital y Emisora en Vivo</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,7 +11,7 @@
   <!-- CABECERA DE LA PÁGINA -->
   <header class="site-header">
     <div class="header-container">
-      <button id="menuToggleBtn" class="menu-toggle-btn" aria-label="Abrir menú">
+      <button id="menuToggleBtn" class="menu-toggle-btn" aria-label="Abrir menú" type="button">
         <span class="hamburger-bar"></span>
         <span class="hamburger-bar"></span>
         <span class="hamburger-bar"></span>
@@ -19,7 +19,7 @@
 
       <div class="logo-container">
         <a href="#">
-          <img src="logo-magisfm.png" alt="Magis FM" class="site-logo">
+          <img src="https://pbs.twimg.com/profile_images/1719736524957188096/3nv0ehyi_400x400.jpg" alt="Magis FM" class="site-logo">
         </a>
       </div>
       
@@ -27,11 +27,11 @@
     </div>
   </header>
 
-  <!-- PANEL NAVEGACIÓN DESPLEGABLE (OFF-CANVAS) -->
+  <!-- PANEL NAVEGACIÓN DESPLEGABLE (OFF-CANVAS) - ÚNICO ELEMENTO CON ROJO -->
   <div id="sideNavOverlay" class="sidenav-overlay"></div>
   <aside id="sideNav" class="sidenav">
     <div class="sidenav-header">
-      <button id="closeNavBtn" class="close-nav-btn">&times;</button>
+      <button id="closeNavBtn" class="close-nav-btn" aria-label="Cerrar menú">&times;</button>
     </div>
     
     <div class="sidenav-search">
@@ -73,7 +73,7 @@
             <p class="article-text">
               El Instituto Politécnico Loyola continúa fortaleciendo su compromiso con la educación técnica y profesional de alta calidad, presentando innovadores programas formativos y actualización tecnológica para la comunidad estudiantil.
             </p>
-            <button class="tts-btn">
+            <button class="tts-btn" type="button">
               <span class="tts-icon">🔊</span>
               <span class="tts-text">Escuchar nota</span>
             </button>
@@ -91,7 +91,7 @@
             <p class="article-text">
               La emisora institucional estrena su plataforma moderna con transmisión en vivo sin interrupciones, diseño adaptativo para teléfonos inteligentes y tecnología de accesibilidad por voz sintetizada para sus lectores.
             </p>
-            <button class="tts-btn">
+            <button class="tts-btn" type="button">
               <span class="tts-icon">🔊</span>
               <span class="tts-text">Escuchar nota</span>
             </button>
@@ -106,7 +106,7 @@
   <footer class="site-footer">
     <div class="footer-container">
       <div class="footer-brand">
-        <img src="logo-loyola.png" alt="Instituto Politécnico Loyola" class="footer-logo">
+        <img src="https://pbs.twimg.com/profile_images/1719736524957188096/3nv0ehyi_400x400.jpg" alt="Instituto Politécnico Loyola" class="footer-logo">
         <div class="brand-text">
           <span class="sub-title">Instituto Politécnico</span>
           <strong class="main-title">LOYOLA</strong>
@@ -152,15 +152,16 @@
     </div>
 
     <div class="player-controls">
-      <button id="playBtn" class="play-btn" aria-label="Reproducir">
+      <button id="playBtn" class="play-btn" aria-label="Reproducir" type="button">
         <svg id="playIcon" viewBox="0 0 24 24" class="icon"><path d="M8 5v14l11-7z"/></svg>
         <svg id="pauseIcon" viewBox="0 0 24 24" class="icon hidden"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
         <div id="loader" class="loader hidden"></div>
       </button>
+      <span id="playerStateText" class="player-state-text hidden">Cargando...</span>
     </div>
 
     <div class="player-volume">
-      <button id="muteBtn" class="mute-btn" aria-label="Silenciar">🔊</button>
+      <button id="muteBtn" class="mute-btn" aria-label="Silenciar" type="button">🔊</button>
       <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.9">
     </div>
   </div>
