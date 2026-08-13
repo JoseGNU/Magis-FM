@@ -25,10 +25,10 @@ body {
 }
 
 /* ==========================================
-   HEADER Y MENÚ
+   HEADER Y MENÚ (Colores Oscuros Originales)
    ========================================== */
 .site-header {
-  background-color: #e62b45; /* Rojo institucional */
+  background-color: #1a1a1a; /* Oscuro original */
   color: #fff;
   position: sticky;
   top: 0;
@@ -53,6 +53,9 @@ body {
   flex-direction: column;
   gap: 5px;
   padding: 8px;
+  position: relative;
+  z-index: 101;
+  user-select: none;
 }
 
 .hamburger-bar {
@@ -60,19 +63,22 @@ body {
   height: 3px;
   background-color: #ffffff;
   border-radius: 2px;
+  pointer-events: none;
 }
 
 .site-logo {
   max-height: 45px;
   width: auto;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .header-spacer {
-  width: 41px; /* Para equilibrar el centrado con respecto al botón de menú */
+  width: 41px;
 }
 
 /* ==========================================
-   MENÚ DESPLEGABLE (OFF-CANVAS)
+   MENÚ DESPLEGABLE (OFF-CANVAS - MANTIENE EL ROJO)
    ========================================== */
 .sidenav-overlay {
   position: fixed;
@@ -99,7 +105,7 @@ body {
   left: -320px;
   width: 300px;
   height: 100vh;
-  background-color: #e62b45;
+  background-color: #e62b45; /* Rojo únicamente aquí */
   z-index: 1001;
   overflow-y: auto;
   transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -271,26 +277,26 @@ body {
 }
 
 .tts-btn:hover {
-  background-color: #e62b45;
+  background-color: #0056b3;
   color: #fff;
-  border-color: #e62b45;
+  border-color: #0056b3;
 }
 
 .tts-btn.playing-tts {
-  background-color: #e62b45;
+  background-color: #0056b3;
   color: #fff;
-  border-color: #e62b45;
+  border-color: #0056b3;
 }
 
 /* ==========================================
-   FOOTER INSTITUCIONAL
+   FOOTER INSTITUCIONAL (Color neutro anterior)
    ========================================== */
 .site-footer {
   background-color: #e3e4e6;
   color: #333333;
   padding: 40px 20px 20px 20px;
   margin-top: 50px;
-  margin-bottom: 80px; /* Evita solapamiento con el dock de audio */
+  margin-bottom: 80px;
   border-top: 1px solid #d0d2d5;
 }
 
@@ -313,6 +319,8 @@ body {
 .footer-logo {
   max-width: 55px;
   height: auto;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .brand-text .sub-title {
@@ -359,7 +367,7 @@ body {
 
 .footer-column a:hover {
   text-decoration: underline;
-  color: #e62b45;
+  color: #0056b3;
 }
 
 .footer-bottom {
@@ -372,7 +380,7 @@ body {
 }
 
 /* ==========================================
-   REPRODUCTOR DOCKING FIJO (AUDIO PLAYER)
+   REPRODUCTOR DOCKING FIJO (Estilo Oscuro Original)
    ========================================== */
 .player-dock {
   position: fixed;
@@ -397,7 +405,7 @@ body {
 }
 
 .live-badge {
-  background-color: #e62b45;
+  background-color: #0056b3;
   font-size: 0.7rem;
   font-weight: 800;
   padding: 3px 8px;
@@ -419,7 +427,7 @@ body {
 
 .equalizer span {
   width: 3px;
-  background-color: #e62b45;
+  background-color: #0056b3;
   height: 4px;
 }
 
@@ -432,8 +440,14 @@ body {
   100% { height: 16px; }
 }
 
+.player-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .play-btn {
-  background: #e62b45;
+  background: #0056b3;
   border: none;
   width: 46px;
   height: 46px;
@@ -461,6 +475,12 @@ body {
   position: absolute;
 }
 
+.player-state-text {
+  font-size: 0.85rem;
+  color: #ccc;
+  font-weight: 500;
+}
+
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
@@ -479,7 +499,7 @@ body {
 }
 
 #volumeSlider {
-  accent-color: #e62b45;
+  accent-color: #0056b3;
   cursor: pointer;
 }
 
