@@ -8,21 +8,29 @@ document.addEventListener('DOMContentLoaded', () => {
   const sideNav = document.getElementById('sideNav');
   const sideNavOverlay = document.getElementById('sideNavOverlay');
 
-  function openNav() {
+  function openNav(e) {
+    if (e) e.preventDefault();
     sideNav.classList.add('active');
     sideNavOverlay.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
 
-  function closeNav() {
+  function closeNav(e) {
+    if (e) e.preventDefault();
     sideNav.classList.remove('active');
     sideNavOverlay.classList.remove('active');
     document.body.style.overflow = '';
   }
 
-  if (menuToggleBtn) menuToggleBtn.addEventListener('click', openNav);
-  if (closeNavBtn) closeNavBtn.addEventListener('click', closeNav);
-  if (sideNavOverlay) sideNavOverlay.addEventListener('click', closeNav);
+  if (menuToggleBtn) {
+    menuToggleBtn.addEventListener('click', openNav);
+  }
+  if (closeNavBtn) {
+    closeNavBtn.addEventListener('click', closeNav);
+  }
+  if (sideNavOverlay) {
+    sideNavOverlay.addEventListener('click', closeNav);
+  }
 
 
   // ==========================================
@@ -51,7 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const ttsBtn = card.querySelector('.tts-btn');
     const ttsLabel = ttsBtn.querySelector('.tts-text');
 
-    // Estimación del tiempo de lectura
     const totalWords = (title + " " + text).split(/\s+/).length;
     const wordsPerMinute = parseInt(timeBadge.getAttribute('data-wpm')) || 200;
     const rawMinutes = totalWords / wordsPerMinute;
@@ -74,7 +81,6 @@ document.addEventListener('DOMContentLoaded', () => {
       window.speechSynthesis.cancel();
       if (activeSpeechBtn) resetTtsState();
 
-      // Pausar la radio si está reproduciendo
       if (!audio.paused) {
         playBtn.click();
       }
@@ -124,6 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const volumeSlider = document.getElementById('volumeSlider');
   const muteBtn = document.getElementById('muteBtn');
   const loader = document.getElementById('loader');
+  const playerStateText = document.getElementById('playerStateText');
 
   const streamUrl = "https://paginas.moisespaulino.com/proxy/magisfm/xstream";
   let lastVolume = 1;
@@ -138,6 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (audio.paused) {
       if (loader) loader.classList.remove('hidden');
+      if (playerStateText) playerStateText.classList.remove('hidden');
       
       audio.src = streamUrl;
       
@@ -147,9 +155,12 @@ document.addEventListener('DOMContentLoaded', () => {
           playIcon.classList.add('hidden');
           pauseIcon.classList.remove('hidden');
           equalizer.classList.add('active');
+          if (loader) loader.classList.add('hidden');
+          if (playerStateText) playerStateText.classList.add('hidden');
         }).catch(err => {
           console.error("Error al iniciar audio:", err);
           if (loader) loader.classList.add('hidden');
+          if (playerStateText) playerStateText.classList.add('hidden');
         });
       }
     } else {
@@ -160,12 +171,14 @@ document.addEventListener('DOMContentLoaded', () => {
       pauseIcon.classList.add('hidden');
       equalizer.classList.remove('active');
       if (loader) loader.classList.add('hidden');
+      if (playerStateText) playerStateText.classList.add('hidden');
     }
   });
 
   ['playing', 'canplay', 'loadedmetadata', 'error'].forEach(evt => {
     audio.addEventListener(evt, () => {
       if (loader) loader.classList.add('hidden');
+      if (playerStateText) playerStateText.classList.add('hidden');
     });
   });
 
