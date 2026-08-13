@@ -28,14 +28,14 @@ body {
    HEADER (Azul Real Marítimo Premium)
    ========================================== */
 .site-header {
-  background-color: rgba #1165a2bf 
+  background-color: #0b2240; 
   background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 0);
   background-size: 16px 16px;
   color: #fff;
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 4px 15px rgba #1165a2bf;
+  box-shadow: 0 4px 15px rgba(11, 34, 64, 0.2);
   border-bottom: 3px solid #f2b705; 
 }
 
